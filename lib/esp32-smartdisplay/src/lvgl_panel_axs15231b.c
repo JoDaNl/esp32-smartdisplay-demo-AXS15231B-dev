@@ -118,7 +118,7 @@ esp_err_t bsp_i2c_deinit(void)
 }
 
 
-#ifdef BLABLA   
+#ifdef BLABLA
 // Bit number used to represent command and parameter
 #define LCD_LEDC_CH            1
 
@@ -392,7 +392,7 @@ lv_disp_t *bsp_display_lcd_init(const bsp_display_cfg_t *cfg)
 }
 #endif
 
-#ifdef BOARD_HAS_TOUCH 
+#ifdef BOARD_HAS_TOUCH
 
 static bool bsp_touch_sync_cb(void *arg)
 {
@@ -602,12 +602,13 @@ static void axs15231b_lv_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_col
         p++->full = (uint16_t)((p->full >> 8) | (p->full << 8));
 #endif
 
-    ESP_ERROR_CHECK(esp_lcd_panel_draw_bitmap(panel_handle, area->x1, area->y1, area->x2 + 1, area->y2 + 1, color_map));
     flush_cnt++;
     if (lv_disp_flush_is_last(drv))
     {
         flush_cnt = 0;
     }
+    
+    ESP_ERROR_CHECK(esp_lcd_panel_draw_bitmap(panel_handle, area->x1, area->y1, area->x2 + 1, area->y2 + 1, color_map));
 };
 
 
@@ -658,7 +659,7 @@ void lvgl_lcd_init(lv_disp_drv_t *drv)
     drv->sw_rotate = 0;
     drv->rotated = LV_DISP_ROT_NONE;
     
-    drv->full_refresh = 1; // JOS : required as partional/windows mechanism is not working 
+//    drv->full_refresh = 1; // JOS : required as partional/windows mechanism is not working
 //    drv->rounder_cb = rounder_cb; // JOS
 
     uint32_t max_transfer_sz = EXAMPLE_LCD_QSPI_H_RES * EXAMPLE_LCD_QSPI_V_RES * sizeof(uint16_t);
