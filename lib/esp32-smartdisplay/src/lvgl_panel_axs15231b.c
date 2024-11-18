@@ -609,6 +609,7 @@ static void axs15231b_lv_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_col
     }
     
     ESP_ERROR_CHECK(esp_lcd_panel_draw_bitmap(panel_handle, area->x1, area->y1, area->x2 + 1, area->y2 + 1, color_map));
+    lv_disp_flush_ready(drv);
 };
 
 
@@ -659,7 +660,7 @@ void lvgl_lcd_init(lv_disp_drv_t *drv)
     drv->sw_rotate = 0;
     drv->rotated = LV_DISP_ROT_NONE;
     
-//    drv->full_refresh = 1; // JOS : required as partional/windows mechanism is not working
+    drv->full_refresh = 1; // JOS : required as partional/windows mechanism is not working
 //    drv->rounder_cb = rounder_cb; // JOS
 
     uint32_t max_transfer_sz = EXAMPLE_LCD_QSPI_H_RES * EXAMPLE_LCD_QSPI_V_RES * sizeof(uint16_t);

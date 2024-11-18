@@ -54,6 +54,7 @@ void loop()
         char text_buffer[32];
         sprintf(text_buffer, "%lu", now);
         lv_label_set_text(ui_lblMillisecondsValue, text_buffer);
+        log_i("JOS - tick %lu", now);
 
 #ifdef BOARD_HAS_RGB_LED
         auto const rgb = (now / 2000) % 8;
